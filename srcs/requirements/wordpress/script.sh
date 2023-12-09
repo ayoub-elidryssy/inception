@@ -18,7 +18,7 @@ wp core install --allow-root \
 		--admin_user=${WP_USER} --admin_password=${WP_PASSWD} \
 		--admin_email=${WP_EMAIL} 
 
-wp user create ${WP_USER2} ${WP_EMIL2} --role=editor --user_pass=${WP_PASSWD2} --allow-root
+wp user create $WP_USER2 $WP_EMIL2 --role=${USER_ROLE} --user_pass=${WP_PASSWD2} --allow-root
 
 chmod 777 -R /var/www/wordpress/wp-content/uploads
 
