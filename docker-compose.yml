@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nginx:
+    container_name: nginx
     build:
       context: nginx
       dockerfile: Dockerfile
@@ -15,6 +16,7 @@ services:
       - wordpress
 
   mariadb:
+    container_name: mariadb
     build:
       context: mariadb
       dockerfile: Dockerfile
@@ -27,12 +29,13 @@ services:
       - mariadb:/var/lib/mysql
   
   wordpress:
+    container_name: wordpress
     env_file: .env
     build:
       context: wordpress
       dockerfile: Dockerfile
     ports:
-      - 9000
+      - "9000"
     volumes:
       - wordpress:/var/www/wordpress
     networks:

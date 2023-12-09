@@ -1,10 +1,11 @@
 #!/bin/sh
 cd /var/www/wordpress
-until mariadb -h mariadb -u  aelidrys -p1234 -e ";" ;do
+while ! mariadb -h mariadb -u  aelidrys -p1234 -e ";" ;do
 	echo "waiting..."
 	sleep 2
-done 
-echo "succsefll.."
+done
+echo "User \"aelidrys\" conected succsefll.."
+
 wp config create	--allow-root \
 		--dbname=$SQL_DATABASE \
 		--dbuser=$SQL_USER \
@@ -17,6 +18,8 @@ wp core install --allow-root \
 		--admin_user=${WP_USER} --admin_password=${WP_PASSWD} \
 		--admin_email=${WP_EMAIL} 
 
-wp user create aban aban@gmail.com --role=editor --user_pass=abanABAN1@ --allow-root
+wp user create ${WP_USER2} ${WP_EMIL2} --role=editor --user_pass=${WP_PASSWD2} --allow-root
+
+chmod 777 -R /var/www/wordpress/wp-content/uploads
 
 php-fpm7.3 -F
