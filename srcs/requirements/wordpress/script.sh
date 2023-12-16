@@ -1,6 +1,6 @@
 #!/bin/sh
 cd /var/www/wordpress
-while ! mariadb -h mariadb -u  aelidrys -p1234 -e ";" ;do
+while ! mariadb -h mariadb -u  aelidrys -p$SQL_PASSWORD ;do
 	echo "waiting..."
 	sleep 2
 done
@@ -23,3 +23,4 @@ wp user create $WP_USER2 $WP_EMIL2 --role=${USER_ROLE} --user_pass=${WP_PASSWD2}
 chmod 777 -R /var/www/wordpress/wp-content/uploads
 
 php-fpm7.3 -F
+PRIVILEGES

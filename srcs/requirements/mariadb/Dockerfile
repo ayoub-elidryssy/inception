@@ -13,6 +13,6 @@ COPY ./db_script /script
 RUN chmod 777 script
 
 # Expose the MySQL port
-# EXPOSE 3306
+EXPOSE 3306
 
 CMD ["./script"]

@@ -8,9 +8,6 @@ RUN apt-get update -y && apt-get install nginx -y
 # Copy configeration files to the container
 COPY config.conf /etc/nginx/sites-enabled
 
-# Copy your web application files to the container
-# COPY ./index.html /var/www/html
-
 # generate ssl certaficate
 RUN mkdir /etc/nginx/ssl
 RUN apt-get update -y && apt-get install openssl -y

@@ -11,7 +11,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - inception-net
+      - net
     depends_on:
       - wordpress
 
@@ -21,10 +21,8 @@ services:
       context: requirements/mariadb
       dockerfile: Dockerfile
     env_file: .env
-    ports:
-      - "3306"
     networks:
-      - inception-net
+      - net
     volumes:
       - mariadb:/var/lib/mysql
   
@@ -34,12 +32,10 @@ services:
     build:
       context: requirements/wordpress
       dockerfile: Dockerfile
-    ports:
-      - "9000"
     volumes:
       - wordpress:/var/www/wordpress
     networks:
-      - inception-net
+      - net
     depends_on:
       - mariadb
 
@@ -57,4 +53,4 @@ volumes:
       o: 'bind'
       device: '/home/aelidrys/data/mariadb'
 networks:
-  inception-net:
+  net:
