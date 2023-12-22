@@ -14,6 +14,7 @@ services:
       - net
     depends_on:
       - wordpress
+    restart: on-failure
 
   mariadb:
     container_name: mariadb
@@ -25,6 +26,7 @@ services:
       - net
     volumes:
       - mariadb:/var/lib/mysql
+    restart: unless-stopped
   
   wordpress:
     container_name: wordpress
@@ -38,6 +40,7 @@ services:
       - net
     depends_on:
       - mariadb
+    restart: on-failure
 
 volumes:
   wordpress:

@@ -6,6 +6,8 @@ while ! mariadb -h mariadb -u  aelidrys -p$SQL_PASSWORD ;do
 done
 echo "User \"aelidrys\" conected succsefll.."
 
+sed -i 's|listen = /run/php/php7.3-fpm.sock|listen = wordpress:9000|' /etc/php/7.3/fpm/pool.d/www.conf
+
 wp config create	--allow-root \
 		--dbname=$SQL_DATABASE \
 		--dbuser=$SQL_USER \
@@ -16,11 +18,10 @@ wp config create	--allow-root \
 wp core install --allow-root \
 		--url=${DOMAIN_NAME} --title=${WP_TITLE} \
 		--admin_user=${WP_USER} --admin_password=${WP_PASSWD} \
-		--admin_email=${WP_EMAIL} 
+		--admin_email=${WP_EMAIL} --skip-email
 
 wp user create $WP_USER2 $WP_EMIL2 --role=${USER_ROLE} --user_pass=${WP_PASSWD2} --allow-root
 
 chmod 777 -R /var/www/wordpress/wp-content/uploads
 
 php-fpm7.3 -F
-PRIVILEGES
